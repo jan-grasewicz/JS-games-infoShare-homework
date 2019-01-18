@@ -13,7 +13,7 @@ Dokończ swoją stronę profilową zgodnie z wymaganiami zapisanymi w Twoim zada
 - 1pkt - responsywne zachowanie layoutu
 
 ### 2. Layouty
-Przećwicz budowanie layoutów z użyciem `flexbox` i `grid`
+Przećwicz budowanie layoutów z użyciem `flexbox` i `grid`. Layouty możesz zrealizować w dowolnej kolejności. Jeżeli chcesz odwzorować layout innej strony niż jedna z tych, które wymieniłem, to jest taka możliwość, jeżeli wcześniej mi to zadeklarujesz :)
 
 #### Wskazówki i punktacja
 1. Sklonuj to repozytorium
