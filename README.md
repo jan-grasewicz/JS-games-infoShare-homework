@@ -8,9 +8,9 @@
 Dokończ swoją stronę profilową zgodnie z wymaganiami zapisanymi w Twoim zadaniu na Jirze
 
 #### Punktacja
-1pkt - poprawny HTML
-1pkt - poprawny CSS
-1pkt - responsywne zachowanie layoutu
+- 1pkt - poprawny HTML
+- 1pkt - poprawny CSS
+- 1pkt - responsywne zachowanie layoutu
 
 ### 2. Layouty
 Przećwicz budowanie layoutów z użyciem `flexbox` i `grid`
