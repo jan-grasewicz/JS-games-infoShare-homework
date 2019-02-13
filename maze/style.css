@@ -1,12 +1,44 @@
 
+*{
+    box-sizing: border-box;
+}
 .container{
-    height: 100vh;
+    background: lightgray;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 .board{
-    background:lightgray;
-    width: 80vh;
-    height: 80vh;
+    border: 2px solid black;
+    background:rgb(255, 255, 168);
+    /* width: 90vh; */
+    /* height: 90vh; */
+}
+.row{
+    display: flex;
+}
+.cell {
+    width: 8vh;
+    height: 8vh;
+    border: 0.25px solid black;
+    /* transition: background-color 0.5s; */
+}
+
+.wall{
+    background: rgb(51, 51, 51);
+}
+.path{
+    background: rgb(79, 110, 79);
+}
+.start{
+    background: rgb(61, 99, 61);
+}
+.end{
+    background: rgb(110, 79, 79);
+}
+.player{
+    background: red;
+    width: 10%;
+    height: 10%;
 }
