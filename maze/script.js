@@ -12,7 +12,6 @@ const maze001 = [
   ]
 //constants and variables
 const boardNode= document.querySelector('.board');
-const startNode= document.querySelector('.start');
 let currentMaze=maze001
 
 //functions
@@ -24,13 +23,13 @@ function generateBoard(){
       let cellNode = createNode("cell"); 
         if(cell==='#'){
           cellNode.classList.add('wall')
-        }else
+        }
         if(cell==='.'){
           cellNode.classList.add('path')
-        }else
+        }
         if(cell==='P'){
           cellNode.classList.add('start')
-        }else
+        }
         if(cell==='T'){
           cellNode.classList.add('end')
         }
@@ -42,6 +41,7 @@ function generateBoard(){
 }
 
 function spawnPlayer(){
+  const startNode= document.querySelector('.start');
   let playerNode=createNode('player');
   startNode.appendChild(playerNode);
 }

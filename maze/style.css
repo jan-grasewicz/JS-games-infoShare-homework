@@ -38,7 +38,8 @@
     background: rgb(110, 79, 79);
 }
 .player{
-    background: red;
-    width: 10%;
-    height: 10%;
+    margin: 15% auto;
+    background: rgba(180, 0, 0, 0.521);
+    width: 70%;
+    height: 70%;
 }
