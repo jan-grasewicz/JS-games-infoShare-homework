@@ -15,7 +15,7 @@ const maze001 = [
 
 //constants and variables
 const boardNode=document.querySelector('.board');
-const playerNode=document.querySelector('.player');
+
 let currentMaze=maze001;
 
 //functions
@@ -50,10 +50,8 @@ function spawnPlayer(toWhere){
 }
 
 function movePlayer(toWhere) {
-  let playerCell= playerNode.parentElement;
   playerCell.removeChild(playerNode);
   spawnPlayer(toWhere)
-  console.log(playerCell)
 }
 
 //helper functions
@@ -66,8 +64,10 @@ function createNode(className) {
 //game
 generateBoard()
 const startNode= document.querySelector('.start');
+const endNode= document.querySelector('.end');
 spawnPlayer(startNode)
-
-
+const playerNode=document.querySelector('.player');
+let playerCell= playerNode.parentElement;
+//movePlayer(endNode)
 
 //sandbox
