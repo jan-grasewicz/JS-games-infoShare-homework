@@ -13,11 +13,6 @@ const maze001 = [
     '#########',
   ]
 
-//constants and variables
-const boardNode=document.querySelector('.board');
-
-let currentMaze=maze001;
-
 //functions
 function generateBoard(){
   let nestedArrMaze=currentMaze.map(row=>row.split(''))
@@ -54,32 +49,14 @@ function movePlayer(toWhere) {
   spawnPlayer(toWhere)
   playerNode=document.querySelector('.player');
   playerCell= playerNode.parentNode;
+  playerRow=playerCell.parentNode;
 }
-
-//helper functions
-function createNode(className) {
-  const node = document.createElement("div");
-  node.classList.add(className);
-  return node;
+function columnIndexTransfer(whichRow){
+  columnIndex=getIndexWithinParent(playerCell)
+  return whichRow.querySelector(`.cell:nth-child(${columnIndex + 1})`);
 }
-
-//game
-generateBoard()
-const startNode= document.querySelector('.start');
-const endNode= document.querySelector('.end');
-spawnPlayer(startNode)
-let playerNode=document.querySelector('.player');
-let playerCell= playerNode.parentNode;
-let playerRow=playerCell.parentNode;
-
-
-//sandbox
-
- 
-window.addEventListener("keyup", handleUserInput);
 
 function handleUserInput(event) {
-  
   console.log(event.code);
   if (event.code === "ArrowRight") {
     const targetNode = playerCell.nextElementSibling;
@@ -98,7 +75,7 @@ function handleUserInput(event) {
   }
 
   if (event.code === "ArrowDown") {
-    const targetNode = playerRow.nextElementSibling;
+    const targetNode = columnIndexTransfer(playerRow.nextElementSibling)
     if (targetNode === null) {
       return;
     }
@@ -106,7 +83,7 @@ function handleUserInput(event) {
   }
 
   if (event.code === "ArrowUp") {
-    const targetNode = playerRow.previousElementSibling;
+    const targetNode = columnIndexTransfer(playerRow.previousElementSibling)
     if (targetNode === null) {
       return;
     }
@@ -114,3 +91,39 @@ function handleUserInput(event) {
   }
   // detectTresureCollision();
 }
+
+//helper functions
+function createNode(className) {
+  const node = document.createElement("div");
+  node.classList.add(className);
+  return node;
+}
+
+function getIndexWithinParent(element) {
+  return Array.from(element.parentNode.children).indexOf(element);
+}
+
+//game
+
+const boardNode=document.querySelector('.board');
+let currentMaze=maze001;
+generateBoard();
+const startNode= document.querySelector('.start');
+const endNode= document.querySelector('.end');
+spawnPlayer(startNode);
+window.addEventListener("keyup", handleUserInput);
+let playerNode=document.querySelector('.player');
+let playerCell= playerNode.parentNode;
+let playerRow=playerCell.parentNode;
+let columnIndex=getIndexWithinParent(playerCell);
+
+//sandbox
+
+
+
+
+ 
+
+
+
+
