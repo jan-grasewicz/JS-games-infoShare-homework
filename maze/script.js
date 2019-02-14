@@ -24,12 +24,12 @@ function generateBoard() {
 
     boardNode.appendChild(rowNode);
   })
-}
+};
 
 function spawnEntity(entityClass, toWhere) {
   let node = createNode(entityClass);
   toWhere.appendChild(node);
-}
+};
 
 function movePlayer(toWhere) {
   // console.log(targetNode)
@@ -41,14 +41,14 @@ function movePlayer(toWhere) {
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
   playerRow = playerCell.parentNode;
-}
+};
 function columnIndexTransfer(whichRow) {
   if (whichRow === null) {
     return;
   }
   columnIndex = getIndexWithinParent(playerCell)
   return whichRow.querySelector(`.cell:nth-child(${columnIndex + 1})`);
-}
+};
 
 function handleUserInput(event) {
   // console.log(event.code);
@@ -83,19 +83,29 @@ function handleUserInput(event) {
     }
     movePlayer(targetNode);
   }
-  // detectTresureCollision();
-}
+  detectTreasureCollision();
+};
+
+function detectTreasureCollision(){
+  if(targetNode.contains(treasureNode)){
+    targetNode.removeChild(treasureNode)
+    console.log('WIN-WIN-WIN-WIN-WIN-WIN')
+    setTimeout(()=>alert('Success! Treasure is yours.'), 500);
+    //add point to player score
+    //load again
+  }
+};
 
 //helper functions
 function createNode(className) {
   const node = document.createElement("div");
   node.classList.add(className);
   return node;
-}
+};
 
 function getIndexWithinParent(element) {
   return Array.from(element.parentNode.children).indexOf(element);
-}
+};
 
 window.addEventListener("keydown", function(e) {
   // space and arrow keys
@@ -114,6 +124,7 @@ spawnEntity('treasure', endNode);
 spawnEntity('player', startNode);
 let targetNode;
 window.addEventListener("keydown", handleUserInput);
+let treasureNode = document.querySelector('.treasure');
 let playerNode = document.querySelector('.player');
 let playerCell = playerNode.parentNode;
 let playerRow = playerCell.parentNode;
