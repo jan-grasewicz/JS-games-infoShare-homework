@@ -32,6 +32,10 @@ function spawnPlayer(toWhere) {
 }
 
 function movePlayer(toWhere) {
+  console.log(targetNode.classList)
+  if(targetNode.classList.contains('wall')){
+    return
+  }
   playerCell.removeChild(playerNode);
   spawnPlayer(toWhere)
   playerNode = document.querySelector('.player');
@@ -47,9 +51,9 @@ function columnIndexTransfer(whichRow) {
 }
 
 function handleUserInput(event) {
-  console.log(event.code);
+  // console.log(event.code);
   if (event.code === "ArrowRight") {
-    const targetNode = playerCell.nextElementSibling;
+    targetNode = playerCell.nextElementSibling;
     if (targetNode === null) {
       return;
     }
@@ -57,7 +61,7 @@ function handleUserInput(event) {
   }
 
   if (event.code === "ArrowLeft") {
-    const targetNode = playerCell.previousElementSibling;
+    targetNode = playerCell.previousElementSibling;
     if (targetNode === null) {
       return;
     }
@@ -65,7 +69,7 @@ function handleUserInput(event) {
   }
 
   if (event.code === "ArrowDown") {
-    const targetNode = columnIndexTransfer(playerRow.nextElementSibling)
+    targetNode = columnIndexTransfer(playerRow.nextElementSibling)
     if (targetNode === undefined) {
       return;
     }
@@ -73,7 +77,7 @@ function handleUserInput(event) {
   }
 
   if (event.code === "ArrowUp") {
-    const targetNode = columnIndexTransfer(playerRow.previousElementSibling)
+    targetNode = columnIndexTransfer(playerRow.previousElementSibling)
     if (targetNode === undefined) {
       return;
     }
@@ -102,24 +106,16 @@ window.addEventListener("keydown", function(e) {
 //game
 
 const boardNode = document.querySelector('.board');
-let currentMaze = maze002;
+let currentMaze = maze001;
 generateBoard();
 const startNode = document.querySelector('.start');
 const endNode = document.querySelector('.end');
 spawnPlayer(startNode);
-window.addEventListener("keyup", handleUserInput);
+let targetNode;
+window.addEventListener("keydown", handleUserInput);
 let playerNode = document.querySelector('.player');
 let playerCell = playerNode.parentNode;
 let playerRow = playerCell.parentNode;
 let columnIndex = getIndexWithinParent(playerCell);
 
 //sandbox
-
-
-
-
-
-
-
-
-
