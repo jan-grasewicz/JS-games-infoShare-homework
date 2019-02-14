@@ -26,18 +26,18 @@ function generateBoard() {
   })
 }
 
-function spawnPlayer(toWhere) {
-  let playerNode = createNode('player');
-  toWhere.appendChild(playerNode);
+function spawnEntity(entityClass, toWhere) {
+  let node = createNode(entityClass);
+  toWhere.appendChild(node);
 }
 
 function movePlayer(toWhere) {
-  console.log(targetNode.classList)
+  // console.log(targetNode)
   if(targetNode.classList.contains('wall')){
     return
   }
   playerCell.removeChild(playerNode);
-  spawnPlayer(toWhere)
+  spawnEntity('player',toWhere)
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
   playerRow = playerCell.parentNode;
@@ -106,11 +106,12 @@ window.addEventListener("keydown", function(e) {
 //game
 
 const boardNode = document.querySelector('.board');
-let currentMaze = maze001;
+let currentMaze = maze002;
 generateBoard();
 const startNode = document.querySelector('.start');
 const endNode = document.querySelector('.end');
-spawnPlayer(startNode);
+spawnEntity('treasure', endNode);
+spawnEntity('player', startNode);
 let targetNode;
 window.addEventListener("keydown", handleUserInput);
 let playerNode = document.querySelector('.player');
