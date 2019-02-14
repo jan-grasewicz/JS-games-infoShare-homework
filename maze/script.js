@@ -2,36 +2,48 @@
 
 //mazes
 const maze001 = [
-    '#########',
-    '#.....#.#',
-    '#.###..T#',
-    '#..#..#.#',
-    '#.#######',
-    '#..#..P.#',
-    '#.##.##.#',
-    '#.....#.#',
-    '#########',
-  ]
-
+  '#########',
+  '#.....#.#',
+  '#.###..T#',
+  '#..#..#.#',
+  '#.#######',
+  '#..#..P.#',
+  '#.##.##.#',
+  '#.....#.#',
+  '#########',
+]
+const maze002 = [
+  '............',
+  '..........T.',
+  '............',
+  '............',
+  '............',
+  '............',
+  '............',
+  '............',
+  '............',
+  '.P..........',
+  '............',
+]
 //functions
-function generateBoard(){
-  let nestedArrMaze=currentMaze.map(row=>row.split(''))
-  nestedArrMaze.forEach(row=>{
+function generateBoard() {
+  let nestedArrMaze = currentMaze.map(row => row.split(''))
+  nestedArrMaze.forEach(row => {
     let rowNode = createNode("row");
-    row.forEach(cell=>{
-      let cellNode = createNode("cell"); 
-        if(cell==='#'){
-          cellNode.classList.add('wall')
-        }
-        if(cell==='.'){
-          cellNode.classList.add('path')
-        }
-        if(cell==='P'){
-          cellNode.classList.add('start')
-        }
-        if(cell==='T'){
-          cellNode.classList.add('end')
-        }
+    row.forEach(cell => {
+      let cellNode = createNode("cell");
+      if (cell === '#') {
+        cellNode.classList.add('wall')
+      }
+      if (cell === '.') {
+        cellNode.classList.add('path')
+      }
+      if (cell === 'P') {
+        cellNode.classList.add('start')
+      }
+      if (cell === 'T') {
+        cellNode.classList.add('end')
+      }
       rowNode.appendChild(cellNode);
     })
 
@@ -39,20 +51,23 @@ function generateBoard(){
   })
 }
 
-function spawnPlayer(toWhere){
-  let playerNode=createNode('player');
+function spawnPlayer(toWhere) {
+  let playerNode = createNode('player');
   toWhere.appendChild(playerNode);
 }
 
 function movePlayer(toWhere) {
   playerCell.removeChild(playerNode);
   spawnPlayer(toWhere)
-  playerNode=document.querySelector('.player');
-  playerCell= playerNode.parentNode;
-  playerRow=playerCell.parentNode;
+  playerNode = document.querySelector('.player');
+  playerCell = playerNode.parentNode;
+  playerRow = playerCell.parentNode;
 }
-function columnIndexTransfer(whichRow){
-  columnIndex=getIndexWithinParent(playerCell)
+function columnIndexTransfer(whichRow) {
+  if (whichRow === null) {
+    return;
+  }
+  columnIndex = getIndexWithinParent(playerCell)
   return whichRow.querySelector(`.cell:nth-child(${columnIndex + 1})`);
 }
 
@@ -76,7 +91,7 @@ function handleUserInput(event) {
 
   if (event.code === "ArrowDown") {
     const targetNode = columnIndexTransfer(playerRow.nextElementSibling)
-    if (targetNode === null) {
+    if (targetNode === undefined) {
       return;
     }
     movePlayer(targetNode);
@@ -84,7 +99,7 @@ function handleUserInput(event) {
 
   if (event.code === "ArrowUp") {
     const targetNode = columnIndexTransfer(playerRow.previousElementSibling)
-    if (targetNode === null) {
+    if (targetNode === undefined) {
       return;
     }
     movePlayer(targetNode);
@@ -105,24 +120,24 @@ function getIndexWithinParent(element) {
 
 //game
 
-const boardNode=document.querySelector('.board');
-let currentMaze=maze001;
+const boardNode = document.querySelector('.board');
+let currentMaze = maze001;
 generateBoard();
-const startNode= document.querySelector('.start');
-const endNode= document.querySelector('.end');
+const startNode = document.querySelector('.start');
+const endNode = document.querySelector('.end');
 spawnPlayer(startNode);
 window.addEventListener("keyup", handleUserInput);
-let playerNode=document.querySelector('.player');
-let playerCell= playerNode.parentNode;
-let playerRow=playerCell.parentNode;
-let columnIndex=getIndexWithinParent(playerCell);
+let playerNode = document.querySelector('.player');
+let playerCell = playerNode.parentNode;
+let playerRow = playerCell.parentNode;
+let columnIndex = getIndexWithinParent(playerCell);
 
 //sandbox
 
 
 
 
- 
+
 
 
 
