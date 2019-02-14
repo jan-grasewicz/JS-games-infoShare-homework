@@ -1,3 +1,5 @@
+'use strict'
+
 //mazes
 const maze001 = [
     '#########',
@@ -10,13 +12,15 @@ const maze001 = [
     '#.....#.#',
     '#########',
   ]
+
 //constants and variables
-const boardNode= document.querySelector('.board');
-let currentMaze=maze001
+const boardNode=document.querySelector('.board');
+const playerNode=document.querySelector('.player');
+let currentMaze=maze001;
 
 //functions
 function generateBoard(){
-  let nestedArrMaze= currentMaze.map(row=>row.split(''))
+  let nestedArrMaze=currentMaze.map(row=>row.split(''))
   nestedArrMaze.forEach(row=>{
     let rowNode = createNode("row");
     row.forEach(cell=>{
@@ -40,10 +44,16 @@ function generateBoard(){
   })
 }
 
-function spawnPlayer(){
-  const startNode= document.querySelector('.start');
+function spawnPlayer(toWhere){
   let playerNode=createNode('player');
-  startNode.appendChild(playerNode);
+  toWhere.appendChild(playerNode);
+}
+
+function movePlayer(toWhere) {
+  let playerCell= playerNode.parentElement;
+  playerCell.removeChild(playerNode);
+  spawnPlayer(toWhere)
+  console.log(playerCell)
 }
 
 //helper functions
@@ -52,10 +62,12 @@ function createNode(className) {
   node.classList.add(className);
   return node;
 }
+
 //game
 generateBoard()
-spawnPlayer()
+const startNode= document.querySelector('.start');
+spawnPlayer(startNode)
+
+
 
 //sandbox
-
-
