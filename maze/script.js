@@ -52,6 +52,8 @@ function spawnPlayer(toWhere){
 function movePlayer(toWhere) {
   playerCell.removeChild(playerNode);
   spawnPlayer(toWhere)
+  playerNode=document.querySelector('.player');
+  playerCell= playerNode.parentNode;
 }
 
 //helper functions
@@ -66,8 +68,49 @@ generateBoard()
 const startNode= document.querySelector('.start');
 const endNode= document.querySelector('.end');
 spawnPlayer(startNode)
-const playerNode=document.querySelector('.player');
-let playerCell= playerNode.parentElement;
-//movePlayer(endNode)
+let playerNode=document.querySelector('.player');
+let playerCell= playerNode.parentNode;
+let playerRow=playerCell.parentNode;
+
 
 //sandbox
+
+ 
+window.addEventListener("keyup", handleUserInput);
+
+function handleUserInput(event) {
+  
+  console.log(event.code);
+  if (event.code === "ArrowRight") {
+    const targetNode = playerCell.nextElementSibling;
+    if (targetNode === null) {
+      return;
+    }
+    movePlayer(targetNode);
+  }
+
+  if (event.code === "ArrowLeft") {
+    const targetNode = playerCell.previousElementSibling;
+    if (targetNode === null) {
+      return;
+    }
+    movePlayer(targetNode);
+  }
+
+  if (event.code === "ArrowDown") {
+    const targetNode = playerRow.nextElementSibling;
+    if (targetNode === null) {
+      return;
+    }
+    movePlayer(targetNode);
+  }
+
+  if (event.code === "ArrowUp") {
+    const targetNode = playerRow.previousElementSibling;
+    if (targetNode === null) {
+      return;
+    }
+    movePlayer(targetNode);
+  }
+  // detectTresureCollision();
+}
