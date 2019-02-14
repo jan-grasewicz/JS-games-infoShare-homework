@@ -32,10 +32,10 @@
     background: rgb(79, 110, 79);
 }
 .start{
-    background: rgb(61, 99, 61);
+    background: rgb(95, 128, 95);
 }
 .end{
-    background: rgb(110, 79, 79);
+    background: rgb(61, 99, 61);
 }
 .player{
     border: 0.5px black solid;
@@ -43,4 +43,12 @@
     background: rgba(180, 0, 0, 0.521);
     width: 70%;
     height: 70%;
+    border-radius: 50%;
+}
+.treasure{
+    border: 0.5px rgb(221, 219, 96) solid;
+    margin: 25% auto;
+    background: rgb(194, 192, 58);
+    width: 80%;
+    height: 50%;
 }
