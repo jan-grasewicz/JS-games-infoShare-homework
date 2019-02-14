@@ -1,30 +1,5 @@
 'use strict'
 
-//mazes
-const maze001 = [
-  '#########',
-  '#.....#.#',
-  '#.###..T#',
-  '#..#..#.#',
-  '#.#######',
-  '#..#..P.#',
-  '#.##.##.#',
-  '#.....#.#',
-  '#########',
-]
-const maze002 = [
-  '............',
-  '..........T.',
-  '............',
-  '............',
-  '............',
-  '............',
-  '............',
-  '............',
-  '............',
-  '.P..........',
-  '............',
-]
 //functions
 function generateBoard() {
   let nestedArrMaze = currentMaze.map(row => row.split(''))
@@ -121,7 +96,7 @@ function getIndexWithinParent(element) {
 //game
 
 const boardNode = document.querySelector('.board');
-let currentMaze = maze001;
+let currentMaze = maze002;
 generateBoard();
 const startNode = document.querySelector('.start');
 const endNode = document.querySelector('.end');
