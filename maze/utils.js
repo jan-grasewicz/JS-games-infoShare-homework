@@ -33,67 +33,53 @@ function spawnEntity(entityClass, toWhere) {
     toWhere.appendChild(node);
 };
 
-function movePlayer(toWhere) {
+function movePlayer1(toWhere) {
     if (toWhere.classList.contains('wall')) {
         return
     }
-    playerCell.removeChild(playerNode);
-    spawnEntity('player', toWhere)
+    player1Node.parentNode.removeChild(player1Node);
+    spawnEntity('player1', toWhere)
 
-    playerNode = document.querySelector('.player');
-    playerCell = playerNode.parentNode;
+    player1Node = document.querySelector('.player1');
     let treasureNode = document.querySelector('.treasure');
     detectCollisionDestroy(toWhere, treasureNode, announcWinner);
 };
 
-function columnIndexTransfer(whichRow) {
-    if (whichRow === null) {
-        return;
-    }
-    let columnIndex = getIndexWithinParent(playerCell);
-    return whichRow.querySelector(`.cell:nth-child(${columnIndex + 1})`);
-};
-
 function handleUserInput(event) {
     // console.log(event.code);
-    let targetNode
-    let playerRow = playerCell.parentNode;
-    
+    let target1Node
+    let player1Row = player1Node.parentNode.parentNode;
     if (event.code === "ArrowRight") {
-        targetNode = playerCell.nextElementSibling;
-        if (targetNode === null) {
+        target1Node = targetCellRight(player1Node);
+        if (target1Node === null) {
             return;
         }
-        movePlayer(targetNode);
+        movePlayer1(target1Node);
     }
 
     if (event.code === "ArrowLeft") {
-        targetNode = playerCell.previousElementSibling;
-        if (targetNode === null) {
+        target1Node = targetCellLeft(player1Node);
+        if (target1Node === null) {
             return;
         }
-        movePlayer(targetNode);
+        movePlayer1(target1Node);
     }
 
     if (event.code === "ArrowDown") {
-        targetNode = columnIndexTransfer(playerRow.nextElementSibling)
-        if (targetNode === undefined) {
+        target1Node = targetCellDown(player1Node);
+        if (target1Node === undefined) {
             return;
         }
-        movePlayer(targetNode);
+        movePlayer1(target1Node);
     }
 
     if (event.code === "ArrowUp") {
-        targetNode = columnIndexTransfer(playerRow.previousElementSibling)
-        if (targetNode === undefined) {
+        target1Node = targetCellUp(player1Node);
+        if (target1Node === undefined) {
             return;
         }
-        movePlayer(targetNode);
-    }
-
-    // if (treasureNode==='undefined')
-    // {console.log('wrong key')}
-    
+        movePlayer1(target1Node);
+    }    
 };
 
 function announcWinner() {
