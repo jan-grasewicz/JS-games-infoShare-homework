@@ -142,15 +142,14 @@ function removeKeyboardScrolling(){
 let playerNode
 let playerCell
 
-removeKeyboardScrolling()
-
 function play(whichMaze=maze002){
+  removeKeyboardScrolling()
+  window.addEventListener("keydown", handleUserInput);
   generateBoard(whichMaze);
   let startNode = document.querySelector('.start');
   let endNode = document.querySelector('.end');
   spawnEntity('treasure', endNode);
   spawnEntity('player', startNode);
-  window.addEventListener("keydown", handleUserInput);
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
 }
