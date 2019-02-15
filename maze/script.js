@@ -95,10 +95,8 @@ function detectTreasureCollision(){
     setTimeout(()=>{
       alert('Success! Treasure is yours.')
       play()
-    }, 500);
+    }, 200);
     //add point to player score
-    //load again
-    
   }
 };
 
