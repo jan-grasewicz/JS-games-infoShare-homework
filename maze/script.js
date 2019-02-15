@@ -1,10 +1,10 @@
 'use strict'
 
 //functions
-function generateBoard() {
+function generateBoard(whichMaze) {
   let boardNode = document.querySelector('.board');
   removeAllChildrenNodes(boardNode);
-  let nestedArrMaze = currentMaze.map(row => row.split(''))
+  let nestedArrMaze = whichMaze.map(row => row.split(''))
   nestedArrMaze.forEach(row => {
     let rowNode = createNode("row");
     row.forEach(cell => {
@@ -87,6 +87,12 @@ function handleUserInput(event) {
     }
     movePlayer(targetNode);
   }
+  
+  // if (treasureNode==='undefined')
+  // {console.log('wrong key')}
+
+
+
   detectCollisionDestroy(targetNode,treasureNode,announcWinner);
 };
 
@@ -109,13 +115,6 @@ function getIndexWithinParent(element) {
   return Array.from(element.parentNode.children).indexOf(element);
 };
 
-window.addEventListener("keydown", function(e) {
-  // space and arrow keys
-  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-      e.preventDefault();
-  }
-}, false);
-
 function removeAllChildrenNodes(parentNode){
   while (parentNode.firstChild) {
     parentNode.removeChild(parentNode.firstChild);
@@ -131,19 +130,24 @@ function detectCollisionDestroy(target,contain,actionFunc){
   }
 };
 
+function removeKeyboardScrolling(){
+  window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+  }, false);
+  }
+
 //game
-let currentMaze
-window.addEventListener("keydown", handleUserInput);
 let playerNode
 let playerCell
 let playerRow 
 let columnIndex
+removeKeyboardScrolling()
 
-
-function play(){
-  
-  currentMaze = maze002;
-  generateBoard();
+function play(whichMaze=maze002){
+  generateBoard(whichMaze);
   let startNode = document.querySelector('.start');
   let endNode = document.querySelector('.end');
   spawnEntity('treasure', endNode);
@@ -153,11 +157,9 @@ function play(){
   playerCell = playerNode.parentNode;
   playerRow = playerCell.parentNode;
   columnIndex = getIndexWithinParent(playerCell);
-  
 }
 
 play()
 //sandbox
-
 
 
