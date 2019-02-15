@@ -2,7 +2,7 @@
 
 //game
 let player1Node
-
+let player2Node
 
 function play(whichMaze=maze002){
   removeKeyboardScrolling()
@@ -14,6 +14,7 @@ function play(whichMaze=maze002){
   spawnEntity('player1', startNode);
   spawnEntity('player2', startNode);
   player1Node = document.querySelector('.player1');
+  player2Node = document.querySelector('.player2');
 }
 
 play()

@@ -23,7 +23,6 @@ function generateBoard(whichMaze) {
             }
             rowNode.appendChild(cellNode);
         })
-
         boardNode.appendChild(rowNode);
     })
 };
@@ -45,8 +44,20 @@ function movePlayer1(toWhere) {
     detectCollisionDestroy(toWhere, treasureNode, announcWinner);
 };
 
+function movePlayer2(toWhere) {
+    if (toWhere.classList.contains('wall')) {
+        return
+    }
+    player2Node.parentNode.removeChild(player2Node);
+    spawnEntity('player2', toWhere)
+
+    player2Node = document.querySelector('.player2');
+    let treasureNode = document.querySelector('.treasure');
+    detectCollisionDestroy(toWhere, treasureNode, announcWinner);
+};
+
 function handleUserInput(event) {
-    console.log(event.code);
+    // console.log(event.code);
     let target1Node
     let target2Node
     if (event.code === "ArrowRight") {
@@ -86,7 +97,7 @@ function handleUserInput(event) {
         if (target2Node === null) {
             return;
         }
-        movePlayer1(target2Node);
+        movePlayer2(target2Node);
     }
 
     if (event.code === "KeyA") {
@@ -94,7 +105,7 @@ function handleUserInput(event) {
         if (target2Node === null) {
             return;
         }
-        movePlayer1(target2Node);
+        movePlayer2(target2Node);
     }
 
     if (event.code === "KeyS") {
@@ -102,7 +113,7 @@ function handleUserInput(event) {
         if (target2Node === undefined) {
             return;
         }
-        movePlayer1(target2Node);
+        movePlayer2(target2Node);
     }
 
     if (event.code === "KeyW") {
@@ -110,7 +121,7 @@ function handleUserInput(event) {
         if (target2Node === undefined) {
             return;
         }
-        movePlayer1(target2Node);
+        movePlayer2(target2Node);
     }
 };
 
