@@ -34,7 +34,6 @@ function spawnEntity(entityClass, toWhere) {
 };
 
 function movePlayer(toWhere) {
-  // console.log(targetNode)
   if(toWhere.classList.contains('wall')){
     return
   }
@@ -42,19 +41,19 @@ function movePlayer(toWhere) {
   spawnEntity('player',toWhere)
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
-  playerRow = playerCell.parentNode;
 };
 function columnIndexTransfer(whichRow) {
   if (whichRow === null) {
     return;
   }
-  columnIndex = getIndexWithinParent(playerCell)
+  let columnIndex = getIndexWithinParent(playerCell);
   return whichRow.querySelector(`.cell:nth-child(${columnIndex + 1})`);
 };
 
 function handleUserInput(event) {
   // console.log(event.code);
   let targetNode
+  let playerRow = playerCell.parentNode;
   let treasureNode = document.querySelector('.treasure');
   if (event.code === "ArrowRight") {
     targetNode = playerCell.nextElementSibling;
@@ -142,8 +141,7 @@ function removeKeyboardScrolling(){
 //game
 let playerNode
 let playerCell
-let playerRow 
-let columnIndex
+
 removeKeyboardScrolling()
 
 function play(whichMaze=maze002){
@@ -155,8 +153,6 @@ function play(whichMaze=maze002){
   window.addEventListener("keydown", handleUserInput);
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
-  playerRow = playerCell.parentNode;
-  columnIndex = getIndexWithinParent(playerCell);
 }
 
 play()
