@@ -2,6 +2,8 @@
 
 //functions
 function generateBoard() {
+  let boardNode = document.querySelector('.board');
+  removeAllChildrenNodes(boardNode);
   let nestedArrMaze = currentMaze.map(row => row.split(''))
   nestedArrMaze.forEach(row => {
     let rowNode = createNode("row");
@@ -90,9 +92,13 @@ function detectTreasureCollision(){
   if(targetNode.contains(treasureNode)){
     targetNode.removeChild(treasureNode)
     console.log('WIN-WIN-WIN-WIN-WIN-WIN')
-    setTimeout(()=>alert('Success! Treasure is yours.'), 500);
+    setTimeout(()=>{
+      alert('Success! Treasure is yours.')
+      play()
+    }, 500);
     //add point to player score
     //load again
+    
   }
 };
 
@@ -113,21 +119,44 @@ window.addEventListener("keydown", function(e) {
       e.preventDefault();
   }
 }, false);
-//game
 
-const boardNode = document.querySelector('.board');
-let currentMaze = maze002;
-generateBoard();
-const startNode = document.querySelector('.start');
-const endNode = document.querySelector('.end');
-spawnEntity('treasure', endNode);
-spawnEntity('player', startNode);
+function removeAllChildrenNodes(parentNode){
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.firstChild);
+}
+};
+//game
+let currentMaze
 let targetNode;
 window.addEventListener("keydown", handleUserInput);
-let treasureNode = document.querySelector('.treasure');
-let playerNode = document.querySelector('.player');
-let playerCell = playerNode.parentNode;
-let playerRow = playerCell.parentNode;
-let columnIndex = getIndexWithinParent(playerCell);
+let treasureNode
+let playerNode
+let playerCell
+let playerRow 
+let columnIndex
 
+
+function play(){
+  
+  currentMaze = maze002;
+  generateBoard();
+  // let boardNode = document.querySelector('.board');
+  let startNode = document.querySelector('.start');
+  let endNode = document.querySelector('.end');
+  spawnEntity('treasure', endNode);
+  spawnEntity('player', startNode);
+  targetNode;
+  window.addEventListener("keydown", handleUserInput);
+  treasureNode = document.querySelector('.treasure');
+  playerNode = document.querySelector('.player');
+  playerCell = playerNode.parentNode;
+  playerRow = playerCell.parentNode;
+  columnIndex = getIndexWithinParent(playerCell);
+  
+}
+
+play()
 //sandbox
+
+
+
