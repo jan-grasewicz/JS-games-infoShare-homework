@@ -35,7 +35,7 @@ function spawnEntity(entityClass, toWhere) {
 
 function movePlayer(toWhere) {
   // console.log(targetNode)
-  if(targetNode.classList.contains('wall')){
+  if(toWhere.classList.contains('wall')){
     return
   }
   playerCell.removeChild(playerNode);
@@ -54,6 +54,8 @@ function columnIndexTransfer(whichRow) {
 
 function handleUserInput(event) {
   // console.log(event.code);
+  let targetNode
+  let treasureNode = document.querySelector('.treasure');
   if (event.code === "ArrowRight") {
     targetNode = playerCell.nextElementSibling;
     if (targetNode === null) {
@@ -85,20 +87,16 @@ function handleUserInput(event) {
     }
     movePlayer(targetNode);
   }
-  detectTreasureCollision();
+  detectCollisionDestroy(targetNode,treasureNode,announcWinner);
 };
 
-function detectTreasureCollision(){
-  if(targetNode.contains(treasureNode)){
-    targetNode.removeChild(treasureNode)
-    console.log('WIN-WIN-WIN-WIN-WIN-WIN')
+function announcWinner(){
+  console.log('WIN-WIN-WIN-WIN-WIN-WIN')
     setTimeout(()=>{
       alert('Success! Treasure is yours.')
       play()
     }, 200);
-    //add point to player score
-  }
-};
+}
 
 //helper functions
 function createNode(className) {
@@ -123,11 +121,19 @@ function removeAllChildrenNodes(parentNode){
     parentNode.removeChild(parentNode.firstChild);
 }
 };
+
+function detectCollisionDestroy(target,contain,actionFunc){
+  if(target.contains(contain)){
+    target.removeChild(contain)
+    actionFunc()
+    // announce action
+    //add point to player score
+  }
+};
+
 //game
 let currentMaze
-let targetNode;
 window.addEventListener("keydown", handleUserInput);
-let treasureNode
 let playerNode
 let playerCell
 let playerRow 
@@ -138,14 +144,11 @@ function play(){
   
   currentMaze = maze002;
   generateBoard();
-  // let boardNode = document.querySelector('.board');
   let startNode = document.querySelector('.start');
   let endNode = document.querySelector('.end');
   spawnEntity('treasure', endNode);
   spawnEntity('player', startNode);
-  targetNode;
   window.addEventListener("keydown", handleUserInput);
-  treasureNode = document.querySelector('.treasure');
   playerNode = document.querySelector('.player');
   playerCell = playerNode.parentNode;
   playerRow = playerCell.parentNode;
