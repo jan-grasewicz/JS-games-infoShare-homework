@@ -46,9 +46,9 @@ function movePlayer1(toWhere) {
 };
 
 function handleUserInput(event) {
-    // console.log(event.code);
+    console.log(event.code);
     let target1Node
-    let player1Row = player1Node.parentNode.parentNode;
+    let target2Node
     if (event.code === "ArrowRight") {
         target1Node = targetCellRight(player1Node);
         if (target1Node === null) {
@@ -79,8 +79,63 @@ function handleUserInput(event) {
             return;
         }
         movePlayer1(target1Node);
-    }    
+    }
+    //second player controls
+    if (event.code === "KeyD") {
+        target2Node = targetCellRight(player2Node);
+        if (target2Node === null) {
+            return;
+        }
+        movePlayer1(target2Node);
+    }
+
+    if (event.code === "KeyA") {
+        target2Node = targetCellLeft(player2Node);
+        if (target2Node === null) {
+            return;
+        }
+        movePlayer1(target2Node);
+    }
+
+    if (event.code === "KeyS") {
+        target2Node = targetCellDown(player2Node);
+        if (target2Node === undefined) {
+            return;
+        }
+        movePlayer1(target2Node);
+    }
+
+    if (event.code === "KeyW") {
+        target2Node = targetCellUp(player2Node);
+        if (target2Node === undefined) {
+            return;
+        }
+        movePlayer1(target2Node);
+    }
 };
+
+function targetCellRight(whichPlayerNode) {
+    return whichPlayerNode.parentNode.nextElementSibling;
+}
+function targetCellLeft(whichPlayerNode) {
+    return whichPlayerNode.parentNode.previousElementSibling;
+}
+function targetCellDown(whichPlayerNode) {
+    let playerRow = whichPlayerNode.parentNode.parentNode;
+    if (playerRow.nextElementSibling === null) {
+        return;
+    }
+    let columnIndex = getIndexWithinParent(whichPlayerNode.parentNode);
+    return playerRow.nextElementSibling.querySelector(`.cell:nth-child(${columnIndex + 1})`);
+}
+function targetCellUp(whichPlayerNode) {
+    let playerRow = whichPlayerNode.parentNode.parentNode;
+    if (playerRow.previousElementSibling === null) {
+        return;
+    }
+    let columnIndex = getIndexWithinParent(whichPlayerNode.parentNode);
+    return playerRow.previousElementSibling.querySelector(`.cell:nth-child(${columnIndex + 1})`);
+}
 
 function announcWinner() {
     console.log('WIN-WIN-WIN-WIN-WIN-WIN')
